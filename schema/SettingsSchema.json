@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "ServerReadyAction": {
+      "properties": {
+        "outputPattern": {
+          "type": "string",
+          "description": "A case-sensitive .NET Regular expression to test output sent to the output window. When a match is found the project specified by 'projectToLaunch' will be launched."
+        },
+        "projectToLaunch": {
+          "type": "string",
+          "description": "The unique name of a project in the solution."
+        }
+      },
+      "required": [ "outputPattern", "projectToLaunch" ]
+    }
+  },
+  "properties": {
+    "serverReadyActions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ServerReadyAction"
+      },
+      "description": "The set of rules to control the VSServerReadyLauncher extension."
+    }
+  },
+  "required": [ "serverReadyActions" ]
+}
