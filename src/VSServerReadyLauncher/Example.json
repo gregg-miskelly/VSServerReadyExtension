@@ -1,0 +1,9 @@
+{
+  "$schema": "https://aka.ms/VSServerReadyExtension-schema",
+  "serverReadyActions": [
+    {
+      "outputPattern": "{insert-regex-here}",
+      "projectToLaunch": "{insert-unique-project-name-here}"
+    }
+  ]
+}
