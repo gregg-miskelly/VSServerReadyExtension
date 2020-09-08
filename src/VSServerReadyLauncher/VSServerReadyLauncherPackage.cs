@@ -27,6 +27,7 @@ namespace VSServerReadyLauncher
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [Guid(VSServerReadyLauncherPackage.PackageGuidString)]
     [ProvideAutoLoad(VSConstants.UICONTEXT.Debugging_string)]
+    [ProvideMenuResource("Menus.ctmenu", 1)]
     public sealed class VSServerReadyLauncherPackage : AsyncPackage
     {
         /// <summary>
@@ -54,8 +55,10 @@ namespace VSServerReadyLauncher
             // In case we are loading after a solution has already loaded, check for settings files
             if (DebuggerEventCallback.Instance.IsDebugging)
             {
-                LaunchSettings.OnStartDebugging(this);
+                ExtensionSettings.OnStartDebugging(this);
             }
+
+            await OpenSettingsCommand.InitializeAsync(this);
         }
 
         protected override void Dispose(bool disposing)

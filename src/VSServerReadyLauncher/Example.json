@@ -1,9 +1,9 @@
-{
+﻿{
   "$schema": "https://aka.ms/VSServerReadyExtension-schema",
   "serverReadyActions": [
-    {
-      "outputPattern": "{insert-regex-here}",
-      "projectToLaunch": "{insert-unique-project-name-here}"
-    }
+    // This file defines rules that the VSServerReadyLauncher extension will look at. To enable,
+    // uncomment the below rule and fill in the various fields with real values.
+    //
+    // { "outputPattern": "insert-regex-here", "projectToLaunch": "insert-unique-project-name-here" }
   ]
 }

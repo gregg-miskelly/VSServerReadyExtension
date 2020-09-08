@@ -9,20 +9,20 @@ using System.Runtime.CompilerServices;
 
 namespace VSServerReadyLauncher
 {
-    internal class LaunchSettings
+    internal class ExtensionSettings
     {
         private readonly DateTime _lastWriteTime;
         public IReadOnlyList<ParsedServerReadyAction> ServerReadyActions { get; }
         private bool IsError => ServerReadyActions == null;
 
-        private LaunchSettings(DateTime lastWriteTime, List<ParsedServerReadyAction> serverReadyActions)
+        private ExtensionSettings(DateTime lastWriteTime, List<ParsedServerReadyAction> serverReadyActions)
         {
             _lastWriteTime = lastWriteTime;
             this.ServerReadyActions = serverReadyActions;
         }
 
-        private static LaunchSettings s_instance;
-        public static LaunchSettings Instance
+        private static ExtensionSettings s_instance;
+        public static ExtensionSettings Instance
         {
             get => s_instance;
             private set
@@ -63,7 +63,7 @@ namespace VSServerReadyLauncher
             }
             catch (Exception e)
             {
-                Instance = new LaunchSettings(lastWriteTime, serverReadyActions: null);
+                Instance = new ExtensionSettings(lastWriteTime, serverReadyActions: null);
                 Utilities.PostError(PackageResources.Err_UnableToParseSettingsFile_Args2.FormatCurrentCulture(settingsFilePath, e.Message));
                 return;
             }
@@ -79,16 +79,16 @@ namespace VSServerReadyLauncher
             }
             catch (ServerReadyException e)
             {
-                Instance = new LaunchSettings(lastWriteTime, serverReadyActions: null);
+                Instance = new ExtensionSettings(lastWriteTime, serverReadyActions: null);
                 Utilities.PostError(e.Message);
                 return;
             }
 
-            Instance = new LaunchSettings(lastWriteTime, serverReadyActions);
+            Instance = new ExtensionSettings(lastWriteTime, serverReadyActions);
             Launcher.CreateInstance(serviceProvider, Instance);
         }
 
-        private static string GetSettingsFilePath(IServiceProvider serviceProvider)
+        public static string GetSettingsFilePath(IServiceProvider serviceProvider)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 

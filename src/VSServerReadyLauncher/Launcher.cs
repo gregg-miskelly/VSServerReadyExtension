@@ -10,15 +10,15 @@ namespace VSServerReadyLauncher
     {
         public static Launcher Instance { get; private set; }
         private readonly IServiceProvider _serviceProvider;
-        private readonly LaunchSettings _settings;
+        private readonly ExtensionSettings _settings;
 
-        private Launcher(IServiceProvider serviceProvider, LaunchSettings settings)
+        private Launcher(IServiceProvider serviceProvider, ExtensionSettings settings)
         {
             _serviceProvider = serviceProvider;
             _settings = settings;
         }
 
-        internal static void CreateInstance(IServiceProvider serviceProvider, LaunchSettings launchSettings)
+        internal static void CreateInstance(IServiceProvider serviceProvider, ExtensionSettings launchSettings)
         {
             if (launchSettings.ServerReadyActions.Count == 0)
             {

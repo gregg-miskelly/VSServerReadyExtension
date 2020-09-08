@@ -74,7 +74,7 @@ namespace VSServerReadyLauncher
 
             if (IsDebugMode(newMode) && !IsDebugMode(_currentMode))
             {
-                LaunchSettings.OnStartDebugging(_serviceProvider);
+                ExtensionSettings.OnStartDebugging(_serviceProvider);
             }
             else if (!IsDebugMode(newMode) && IsDebugMode(_currentMode))
             {
